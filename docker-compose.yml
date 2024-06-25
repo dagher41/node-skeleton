@@ -1,0 +1,34 @@
+services:
+  web:
+    build: 
+      context: .
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/var/app
+    environment:
+      - API_DB_NAME=sample_application
+      - API_DB_HOST=postgres
+      - API_DB_USERNAME=root
+      - API_DB_PASSWORD=toor
+      - API_DB_PORT=5432
+      - ENABLE_DB_LOGGING=true
+    depends_on:
+      - postgres
+    command: "npm run dev"
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: sample_application
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

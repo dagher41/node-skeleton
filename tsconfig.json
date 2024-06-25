@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2023", "dom"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "outDir": "./build"
+  },
+  "include": ["./src/**/*", "./data-source.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
