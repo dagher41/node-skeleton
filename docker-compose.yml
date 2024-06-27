@@ -1,5 +1,5 @@
 services:
-  web:
+  blogweb:
     build: 
       context: .
     user: root
@@ -14,6 +14,8 @@ services:
       - API_DB_PASSWORD=toor
       - API_DB_PORT=5432
       - ENABLE_DB_LOGGING=true
+    networks:
+      - sample_app_network
     depends_on:
       - postgres
     command: "npm run dev"
@@ -29,6 +31,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sample_app_network
 
 volumes:
   postgres_data:
+
+networks:
+  sample_app_network:
+    external: true

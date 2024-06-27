@@ -8,7 +8,7 @@ const postRepository = dataSource.getRepository(db.Post)
 const router = Router();
 
 router.get('/posts', async (req: Request, res: Response, _next: NextFunction) => {
-    res.json(await postRepository.find());
+    return res.json(await postRepository.find());
 });
 
 router.get('/post/:id', async (req: Request, res: Response, _next: NextFunction) => {
@@ -28,7 +28,7 @@ router.post('/posts', async (req: Request, res: Response, _next: NextFunction) =
     post.title = req.body.title;
     post.isActive = true;
     await postRepository.save(post);
-    res.json(post);
+    return res.json(post);
 })
 
 router.put('/post/:id', async (req: Request, res: Response, _next: NextFunction) => {
@@ -44,7 +44,7 @@ router.put('/post/:id', async (req: Request, res: Response, _next: NextFunction)
     post.title = req.body.title;
     post.isActive = req.body.isActive;
     await postRepository.save(post);
-    res.json(post);
+    return res.json(post);
 })
 
 export default router;
